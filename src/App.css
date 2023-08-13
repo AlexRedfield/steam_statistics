@@ -1,38 +1,73 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    text-align: center;
+    margin-top: 20px;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  
+  .top-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .top-image {
+    max-width: 80%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-}
+  
+  .image-intro {
+    margin-top: 10px;
+  }
+  
+  /* Carousel Styles */
+  .carousel-root {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .carousel .slide img {
+    max-width: 80%;
+    height: auto;
+  }
+
+  .CalendarApp {
+    max-width: 80%;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .heatmap-container {
+    margin-top: 20px;
+  }
+  
+  /* Custom Tooltip Styles */
+  .react-tooltip {
+    font-size: 12px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 4px;
+  }
+  
+  /* Color Scale Styles */
+  .color-empty {
+    fill: #e1e4e8;
+  }
+  .color-scale-0 {
+    fill: #e1e4e8;
+  }
+  .color-scale-1 {
+    fill: #ade3c1;
+  }
+  
+  .color-scale-3 {
+    fill: #68be85;
+  }
+  
+  .color-scale-5 {
+    fill: #339364;
+  }
+  
+  /* Add more color scale styles based on your data */
+  
