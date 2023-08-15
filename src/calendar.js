@@ -3,13 +3,17 @@ import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import ReactTooltip from 'react-tooltip';
 import './App.css';
-
+import sessionData from './DataCenter'
+import { useEffect, useRef } from 'react'
+import axios from 'axios'
 const data1 = [
     { date: '2023-08-01', count: 5, detail: 'Details for 2023-08-01' },
     { date: '2023-08-02', count: 3, detail: 'Details for 2023-08-02' },
     { date: '2023-08-03', count: 0, detail: 'Details for 2023-08-03' },
   // Add more data here
 ];
+
+
 
 const generateDataForYear = (year) => {
   const startDate = new Date(year, 0, 1);
@@ -22,23 +26,52 @@ const generateDataForYear = (year) => {
     const formattedDate = currentDate.toISOString().split('T')[0];
     const dataObj = {
       date: formattedDate,
-      count: Math.floor(Math.random() * 10), // Generating a random count for demonstration purposes
+      //count: Math.floor(Math.random() * 10), // Generating a random count for demonstration purposes
+      count: 0,
       detail: `Details for ${formattedDate}`, // You can customize this as needed
     };
     data.push(dataObj);
 
     currentDate.setDate(currentDate.getDate() + 1);
   }
-
   return data;
 };
 
-const data = generateDataForYear(2023);
 
-data.push({ date: '2023-08-04', count: 0, detail: 'Details for 2023-08-03' });
+
+const processData=(raw)=>{
+
+  const data=[]
+  for(var i = 0; i < raw.length; i++){
+    const dataObj = {
+      date: raw[i][2].split(' ')[0],
+      count:  raw[i][4], // Generating a random count for demonstration purposes
+      detail: raw[i][1], // You can customize this as needed
+    };
+    data.push(dataObj);
+  }
+  console.log(raw.length)
+  
+  return data
+
+}
+const data=generateDataForYear(2023)
+data.concat(processData());
 
 const CalendarApp = () => {
+
+  let raw
+  useEffect(()=>{   
+    async function fetchData(){      
+       raw = await axios.get('http://localhost/session');
+       
+    } 
+  },[]);
+  console.log(raw);
+  const data=generateDataForYear(2023)
+  //data.concat(processData(raw));
     const handleCellClick = (value) => {
+      console.log(sessionData.setSessionList())
         if (value) {
           alert(`Date: ${value.date}\nCount: ${value.count}\nDetails: ${value.detail}`);
         }
@@ -57,6 +90,7 @@ const CalendarApp = () => {
       };
       
   const tooltipDataAttrs = (value) => {
+  
     if (value.date) {
       return {
         'data-tip': `Date: ${value.date}\nCount: ${value.count}`,
