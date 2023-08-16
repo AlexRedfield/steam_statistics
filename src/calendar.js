@@ -3,7 +3,7 @@ import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import ReactTooltip from 'react-tooltip';
 import './App.css';
-import sessionData from './DataCenter'
+import SessionData from './DataCenter'
 import { useEffect, useRef } from 'react'
 import axios from 'axios'
 const data1 = [
@@ -12,7 +12,6 @@ const data1 = [
     { date: '2023-08-03', count: 0, detail: 'Details for 2023-08-03' },
   // Add more data here
 ];
-
 
 
 const generateDataForYear = (year) => {
@@ -27,7 +26,7 @@ const generateDataForYear = (year) => {
     const dataObj = {
       date: formattedDate,
       //count: Math.floor(Math.random() * 10), // Generating a random count for demonstration purposes
-      count: 0,
+      count: 1,
       detail: `Details for ${formattedDate}`, // You can customize this as needed
     };
     data.push(dataObj);
@@ -39,9 +38,9 @@ const generateDataForYear = (year) => {
 
 
 
-const processData=(raw)=>{
+const processData=(ori,raw)=>{
 
-  const data=[]
+  let data=ori
   for(var i = 0; i < raw.length; i++){
     const dataObj = {
       date: raw[i][2].split(' ')[0],
@@ -55,39 +54,44 @@ const processData=(raw)=>{
   return data
 
 }
-const data=generateDataForYear(2023)
-data.concat(processData());
+//const data=generateDataForYear(2023)
+
+
+
+
 
 const CalendarApp = () => {
+  const [data, setData] = React.useState(generateDataForYear(2023));
+  const [txt, setTxt] = React.useState('abc');
+  // useEffect(()=>{
+  //   const fetchData =async () => {
+  //     const result = await axios(
+  //       'http://localhost/session',
+  //     );
 
-  let raw
-  useEffect(()=>{   
-    async function fetchData(){      
-       raw = await axios.get('http://localhost/session');
-       
-    } 
-  },[]);
-  console.log(raw);
-  const data=generateDataForYear(2023)
-  //data.concat(processData(raw));
+  //     setData(processData(data,result.data));
+  //     setTxt('after');
+  //     //debugger
+  //     console.log(data)
+  // };
+  // fetchData();
+  // }, []);
+  useEffect(() => {
+    axios.get('http://localhost/session').then((response) => {
+      setData(processData(data,response.data));
+      setTxt('after');
+    });
+  }, []);
+  data.push({ date: '2023-08-01', count: 5, detail: 'xxxx' })
+
+
     const handleCellClick = (value) => {
-      console.log(sessionData.setSessionList())
+
         if (value) {
           alert(`Date: ${value.date}\nCount: ${value.count}\nDetails: ${value.detail}`);
         }
       };
 
-      const customTooltip = (value) => {
-        if (value) {
-          return (
-            <div>
-              <p>Date: {value.date}</p>
-              <p>Count: {value.count}</p>
-            </div>
-          );
-        }
-        return null;
-      };
       
   const tooltipDataAttrs = (value) => {
   
@@ -105,7 +109,7 @@ const CalendarApp = () => {
 
   return (
     <div className="CalendarApp">
-      <h1>Github Activity</h1>
+      <h1>'abc'</h1>
       <div className="heatmap-container">
         <CalendarHeatmap
           startDate={new Date('2022-12-31')}
@@ -130,7 +134,7 @@ const CalendarApp = () => {
             else if (value.count<=5) {
               return `color-scale-3`;
             }
-
+            
             return `color-scale-5`;
           }}
         />
