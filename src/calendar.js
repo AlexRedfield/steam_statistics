@@ -3,15 +3,11 @@ import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import ReactTooltip from 'react-tooltip';
 import './App.css';
-import SessionData from './DataCenter'
 import { useEffect, useRef } from 'react'
 import axios from 'axios'
-const data1 = [
-    { date: '2023-08-01', count: 5, detail: 'Details for 2023-08-01' },
-    { date: '2023-08-02', count: 3, detail: 'Details for 2023-08-02' },
-    { date: '2023-08-03', count: 0, detail: 'Details for 2023-08-03' },
-  // Add more data here
-];
+import { observable, autorun } from "mobx";
+import { observer,useLocalStore  } from 'mobx-react-lite'
+import { useStore } from './DataCenter'
 
 
 const generateDataForYear = (year) => {
@@ -26,7 +22,7 @@ const generateDataForYear = (year) => {
     const dataObj = {
       date: formattedDate,
       //count: Math.floor(Math.random() * 10), // Generating a random count for demonstration purposes
-      count: 1,
+      count: 0,
       detail: `Details for ${formattedDate}`, // You can customize this as needed
     };
     data.push(dataObj);
@@ -61,30 +57,17 @@ const processData=(ori,raw)=>{
 
 
 const CalendarApp = () => {
-  const [data, setData] = React.useState(generateDataForYear(2023));
-  const [txt, setTxt] = React.useState('abc');
-  // useEffect(()=>{
-  //   const fetchData =async () => {
-  //     const result = await axios(
-  //       'http://localhost/session',
-  //     );
-
-  //     setData(processData(data,result.data));
-  //     setTxt('after');
-  //     //debugger
-  //     console.log(data)
-  // };
-  // fetchData();
-  // }, []);
-  useEffect(() => {
-    axios.get('http://localhost/session').then((response) => {
-      setData(processData(data,response.data));
-      setTxt('after');
-    });
-  }, []);
-  data.push({ date: '2023-08-01', count: 5, detail: 'xxxx' })
-
-
+//   const data=useLocalStore(()=>({
+//     data: generateDataForYear(2023)
+//   }));
+//   axios.get('http://localhost/session').then((response) => {
+      
+//   data.data=processData(data.data,response.data);
+//   data.data=data.data.slice()
+  
+// });
+const store = useStore()
+    const data=processData(generateDataForYear(2023), store.sessionData.sessionList)
     const handleCellClick = (value) => {
 
         if (value) {
@@ -144,4 +127,4 @@ const CalendarApp = () => {
   );
 };
 
-export default CalendarApp;
+export default observer(CalendarApp);
