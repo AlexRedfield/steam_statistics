@@ -3,6 +3,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './App.css';
 import CalendarApp from './calendar';
+import HomePage from './gameBar';
 import { observer } from 'mobx-react-lite'
 
 const session=()=>{
@@ -47,7 +48,7 @@ function App() {
   return (
     <div className="App">
       <h1>Image Slider</h1>
-
+      <HomePage/>
       <CalendarApp/>
     </div>
   );
