@@ -4,7 +4,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './App.css';
 import CalendarApp from './calendar';
 import HomePage from './gameBar';
-import { observer } from 'mobx-react-lite'
+import ReHomePage from './reGameBar';
 
 const session=()=>{
   return(
@@ -48,6 +48,7 @@ function App() {
   return (
     <div className="App">
       <h1>Image Slider</h1>
+      <ReHomePage/>
       <HomePage/>
       <CalendarApp/>
     </div>

@@ -4,7 +4,6 @@ import 'react-calendar-heatmap/dist/styles.css';
 import ReactTooltip from 'react-tooltip';
 import './App.css';
 import { useEffect, useRef } from 'react'
-import axios from 'axios'
 import { observable, autorun } from "mobx";
 import { observer,useLocalStore  } from 'mobx-react-lite'
 import { useStore } from './DataCenter'

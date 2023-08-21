@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, PureComponent } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { useStore } from './DataCenter';
 import { observer } from 'mobx-react-lite'
@@ -9,10 +9,13 @@ const HomePage = () => {
     // const [stores, setStores] = useState([15, 120, 36, 110, 110, 20]);
     const store = useStore()
     const dataL=store.playTimeData.dataL
+    //const gameName = store.playTimeData.dataL[2]
+    //const playTime = store.playTimeData.dataL[1]
+    //debugger
     const gameName = store.playTimeData.gameNameList
     const playTime = store.playTimeData.playTimeList
     const gameId = store.playTimeData.idList
-debugger
+
     // 配置对象
     const option = {
         tooltip: {},
@@ -21,17 +24,14 @@ debugger
 
         },
         yAxis: {
-            data: dataL[1]
+            data: gameName
 
         },
         series: [{
             name: "Time",
             type: "bar",
-            data: dataL[2],
+            data:  playTime,
             legendHoverLink: true,
-            backgroundStyle: {
-
-            }
         }]
     }
     return (
@@ -47,4 +47,6 @@ debugger
     )
 }
 
-export default observer(HomePage)
+
+  export default observer(HomePage)
+
