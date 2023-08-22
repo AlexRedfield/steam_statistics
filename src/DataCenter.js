@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 import axios from 'axios'
 
 class SessionData {
@@ -11,7 +11,10 @@ class SessionData {
 
   setSessionList = async () => {
     const res = await axios.get('http://localhost/session')
-    this.sessionList = res.data
+
+    runInAction(() => {
+      this.sessionList = res.data
+    })
   }
 }
 class PlayTimeData {
@@ -27,11 +30,28 @@ class PlayTimeData {
 
   setPlayTimeList = async () => {
     const res = await axios.get('http://localhost/playtime')
-    this.dataL = res.data
-    this.gameNameList = res.data[1]
-    this.playTimeList = res.data[2]
-    this.idList = res.data[0]
 
+    runInAction(() => {
+      this.dataL = res.data
+      this.gameNameList = res.data[1]
+      this.playTimeList = res.data[2]
+      this.idList = res.data[0]
+    })
+  }
+}
+
+class RePlayTimeData {
+  data = []
+  constructor() {
+    makeAutoObservable(this)
+    this.setDataList()
+  }
+
+  setDataList = async () => {
+    const res = await axios.get('http://localhost/re_playtime')
+    runInAction(() => {
+      this.data = res.data
+    })
   }
 }
 
@@ -39,6 +59,7 @@ class RootStore {
   constructor() {
     this.sessionData = new SessionData()
     this.playTimeData = new PlayTimeData()
+    this.replayTimeData = new RePlayTimeData()
   }
 }
 const rootStore = new RootStore()

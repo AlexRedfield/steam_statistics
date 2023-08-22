@@ -9,8 +9,9 @@ const HomePage = () => {
     // const [stores, setStores] = useState([15, 120, 36, 110, 110, 20]);
     const store = useStore()
     const dataL=store.playTimeData.dataL
-    //const gameName = store.playTimeData.dataL[2]
-    //const playTime = store.playTimeData.dataL[1]
+    const gameName2 = store.playTimeData.dataL[1]
+    const playTime2 = store.playTimeData.dataL[2]
+    
     //debugger
     const gameName = store.playTimeData.gameNameList
     const playTime = store.playTimeData.playTimeList
@@ -24,13 +25,13 @@ const HomePage = () => {
 
         },
         yAxis: {
-            data: gameName
+            data: gameName2
 
         },
         series: [{
             name: "Time",
             type: "bar",
-            data:  playTime,
+            data:  playTime2,
             legendHoverLink: true,
         }]
     }

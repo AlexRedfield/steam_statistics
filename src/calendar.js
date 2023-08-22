@@ -44,7 +44,6 @@ const processData=(ori,raw)=>{
     };
     data.push(dataObj);
   }
-  console.log(raw.length)
   
   return data
 
