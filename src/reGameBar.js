@@ -17,6 +17,11 @@ const genData = (data)=>{
     }
     return l
 }
+function Click(data) {
+    console.log(data['id'])
+    
+}
+
 
 
 const ReHomePage = () => {
@@ -43,7 +48,9 @@ const ReHomePage = () => {
             <YAxis  type="category" dataKey="name" />
             <Tooltip />
             <Legend />
-            <Bar dataKey="time" fill="#8884d8" />
+            <Bar  cursor={"pointer"} dataKey="time" fill="#8884d8" 
+                        onClick=  {(data)=>Click(data)}        
+                        />
             {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
         </BarChart>
     );

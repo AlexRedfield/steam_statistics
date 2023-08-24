@@ -9,8 +9,8 @@ class SessionData {
     this.setSessionList()
   }
 
-  setSessionList = async () => {
-    const res = await axios.get('http://localhost/session')
+  setSessionList = async (id) => {
+    const res = await axios.get('http://localhost/session?id')
 
     runInAction(() => {
       this.sessionList = res.data
@@ -32,7 +32,7 @@ class PlayTimeData {
     const res = await axios.get('http://localhost/playtime')
 
     runInAction(() => {
-      this.dataL = res.data
+      this.dataL = res.data.slice()
       this.gameNameList = res.data[1]
       this.playTimeList = res.data[2]
       this.idList = res.data[0]

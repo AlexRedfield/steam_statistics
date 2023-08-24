@@ -51,9 +51,6 @@ const processData=(ori,raw)=>{
 //const data=generateDataForYear(2023)
 
 
-
-
-
 const CalendarApp = () => {
 //   const data=useLocalStore(()=>({
 //     data: generateDataForYear(2023)
@@ -64,7 +61,7 @@ const CalendarApp = () => {
 //   data.data=data.data.slice()
   
 // });
-const store = useStore()
+    const store = useStore()
     const data=processData(generateDataForYear(2023), store.sessionData.sessionList)
     const handleCellClick = (value) => {
 
