@@ -9,11 +9,13 @@ class SessionData {
     this.setSessionList()
   }
 
-  setSessionList = async (id) => {
-    const res = await axios.get('http://localhost/session?id')
 
-    runInAction(() => {
-      this.sessionList = res.data
+  setSessionList(id) {
+    const url = id == undefined ? 'http://localhost/session' : `http://localhost/session?id=${id}`
+    axios.get(url).then((response) => {
+      runInAction(() => {
+        this.sessionList = response.data
+      })
     })
   }
 }

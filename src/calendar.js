@@ -87,7 +87,7 @@ const CalendarApp = () => {
 
   return (
     <div className="CalendarApp">
-      <h1>'abc'</h1>
+      {/* <h1>'abc'</h1> */}
       <div className="heatmap-container">
         <CalendarHeatmap
           startDate={new Date('2022-12-31')}

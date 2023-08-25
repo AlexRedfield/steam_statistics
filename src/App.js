@@ -48,9 +48,9 @@ function App() {
   return (
     <div className="App">
       <h1>Image Slider</h1>
-      <ReHomePage/>
-      <HomePage/>
-      <CalendarApp/>
+        <ReHomePage/>
+        <CalendarApp/>
+        <HomePage/>
     </div>
   );
 }
