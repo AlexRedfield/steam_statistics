@@ -1,0 +1,32 @@
+/* BarChartWithHover.css */
+
+.custom-tooltip {
+    background-color: #e1f5fe; /* 背景色 */
+    color: #161010; /* 文字颜色 */
+    font-size: 14px; /* 调整字体大小 */
+    padding: 10px;
+    border: 1px solid #666; /* 边框样式 */
+    border-radius: 4px; /* 边框圆角 */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+  }
+  
+  .custom-tooltip img {
+    /* max-width: 160px; 图片最大宽度 */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .custom-tooltip p {
+    margin: 5px 0;
+  }
+  
+  .custom-tooltip p.name {
+    font-size: 18px;
+    font-weight:600;
+  }
+
+  .custom-tooltip p.time {
+    font-size: 14px;
+  }
+
